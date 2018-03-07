@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div class="input-files">
+    <input id="inputFile" type="file">
+  </div>
+  <div class="input-title">
+    <input type="text" id="inputTitle" placeholder="Image Name">
+  </div>
+  <button id="submit">Submit</button>
+  <script>
+    const submitButton = document.getElementById('submit')
+
+    submitButton.addEventListener('click', (e) => {
+      console.log("here")
+      const inputFile = document.getElementById('inputFile')
+      const title = document.getElementById('inputTitle').value
+      const data = new FormData();
+      data.append('image', inputFile.files[0])
+      data.append('title', title)
+      console.log("Built Data =>", data)
+      fetch('/upload/', {
+        method: 'POST',
+        body: data
+      })
+    })
+  </script>
+</body>
+</html>
